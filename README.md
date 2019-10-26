@@ -4,7 +4,9 @@ Manage different aws profiles easily on Bash.
 
 ## Installation
 
-Just source awsprofile from your `bashrc`.
+```bash
+go get github.com/vidimensional/awsprofile@go_implementation
+```
 
 ## Usage
 
