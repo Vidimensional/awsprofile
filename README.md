@@ -5,7 +5,7 @@ Manage different aws profiles easily on Bash.
 ## Installation
 
 ```bash
-go get github.com/vidimensional/awsprofile@go_implementation
+go get github.com/vidimensional/awsprofile
 ```
 
 ## Usage
