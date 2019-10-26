@@ -16,7 +16,9 @@ awsprofile $profile_name
 
 Where `$profile_name` is the name of the profile on `~/.aws/credentials`.
 
-Also you can use autocompletion:
+### Autocompletion (bash only)
+
+Source `awsprofile-completion.bash` 
 
 ```bash
 $ awsprofile account<TAB>
