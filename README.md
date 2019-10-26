@@ -1,6 +1,8 @@
 # awsprofile
 
-Manage different aws profiles easily on Bash.
+Manage different aws profiles easily on the shell.
+
+You can find a previous implementation in Bash in the branch [bash_implementation](https://github.com/Vidimensional/awsprofile/tree/bash_implementation).
 
 ## Installation
 
