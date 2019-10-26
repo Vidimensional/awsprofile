@@ -4,6 +4,11 @@ Manage different aws profiles easily on the shell.
 
 You can find a previous implementation in Bash in the branch [bash_implementation](https://github.com/Vidimensional/awsprofile/tree/bash_implementation).
 
+## Prerequisites
+
+* [`awscli` tool](https://aws.amazon.com/cli/).
+* Some profiles configured with `awscli`.
+
 ## Installation
 
 ```bash
@@ -12,11 +17,20 @@ go get github.com/vidimensional/awsprofile
 
 ## Usage
 
+### Change profile
+
 ```bash
 awsprofile $profile_name
 ```
 
-Where `$profile_name` is the name of the profile on `~/.aws/credentials`.
+### List your configured profiles
+
+```bash
+$ awsprofile
+production
+preproduction
+personal
+```
 
 ### Autocompletion (bash only)
 
