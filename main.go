@@ -29,8 +29,7 @@ func main() {
 
 	} else {
 		for _, profile := range profileList[1:] {
-			fmt.Printf("* %v\n", profile)
+			fmt.Println(profile)
 		}
-
 	}
 }
