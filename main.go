@@ -3,12 +3,17 @@ package main
 import (
 	"fmt"
 	"os"
+	"os/user"
+	"path/filepath"
 
 	"gopkg.in/ini.v1"
 )
 
 func main() {
-	awsCredentialsFile, err := ini.Load("/Users/daniel.vidal/.aws/credentials")
+	currentUser, _ := user.Current()
+	awsCredentialsPath := filepath.Join(currentUser.HomeDir, ".aws/credentials")
+
+	awsCredentialsFile, err := ini.Load(awsCredentialsPath)
 	if err != nil {
 		fmt.Printf("Fail to read file: %v", err)
 		os.Exit(1)
