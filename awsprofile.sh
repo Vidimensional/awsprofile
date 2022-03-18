@@ -8,7 +8,7 @@
 # This needs to be a function inside the shell since we want to update the env var.
 # If we run it as script, it won't be able to change the env var of the parent shell.
 awsprofile() {
-    local profiles="$(aws configuration list-profiles)"
+    local profiles="$(aws configure list-profiles)"
     
     # If we don't specify a profile name, it will show the available profiles.
     if [[ $# -eq 0 ]]; then
@@ -33,6 +33,6 @@ _awsprompt() {
 }
 
 _awsprofile_completion() {
-  COMPREPLY=($(compgen -W "$(aws configuration list-profiles)" -- "${COMP_WORDS[1]}"))
+  COMPREPLY=($(compgen -W "$(aws configure list-profiles)" -- "${COMP_WORDS[1]}"))
 }
 complete -F _awsprofile_completion awsprofile
