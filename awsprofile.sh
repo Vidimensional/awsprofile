@@ -1,21 +1,16 @@
-_awsprompt() {
-  local aws_profile
-  aws_profile="$(env | grep AWS_PROFILE | cut -d= -f2)"
-  [[ "${aws_profile}" == "" ]] && aws_profile=default
-  
-  echo "[AWS->${aws_profile}]"
-}
+# Copyright (C) 2022 Daniel Vidal de la Rubia WTFPL
+#
+# This library is free software; you can redistribute it and/or modify it
+# under any version of the Do What The Fuck You Want To Public License;
+# see the file LICENSE if the license name isn't clear enough.
 
-_aws_list_profiles() {
-    grep '\[' ~/.aws/credentials | tr -d ']['
-}
 
+# This needs to be a function inside the shell since we want to update the env var.
+# If we run it as script, it won't be able to change the env var of the parent shell.
 awsprofile() {
-    local profiles changed
+    local profiles="$(aws configuration list-profiles)"
     
-    profiles="$(_aws_list_profiles)"
-    changed=0
-    
+    # If we don't specify a profile name, it will show the available profiles.
     if [[ $# -eq 0 ]]; then
         echo $profiles | tr ' ' '\n'
         return 0
@@ -24,22 +19,20 @@ awsprofile() {
     for profile in $profiles; do
         if [[ "$1" == "$profile" ]]; then
             export AWS_PROFILE=$1
-            changed=1
-            break
+            echo "AWS profile changed to $1."
+            return 0
         fi
     done
 
-    if [[ "$changed" -eq 1 ]]; then
-        echo "AWS profile changed to $1."
-        return 0
-    else
-        echo "Profile $1 doesn't exist."
-        return 1
-    fi
+    echo "Profile $1 doesn't exist."
+    return 1
+}
+
+_awsprompt() {
+  echo "[AWS->${AWS_PROFILE:-default}]"
 }
 
 _awsprofile_completion() {
-  COMPREPLY=($(compgen -W "$(_aws_list_profiles)" -- "${COMP_WORDS[1]}"))
-
+  COMPREPLY=($(compgen -W "$(aws configuration list-profiles)" -- "${COMP_WORDS[1]}"))
 }
 complete -F _awsprofile_completion awsprofile
