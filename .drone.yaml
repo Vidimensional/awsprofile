@@ -1,0 +1,8 @@
+kind: pipeline
+name: default
+
+steps:
+  - name: test
+    image: debian:11-slim
+    commands:
+      - make test
